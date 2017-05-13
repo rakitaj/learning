@@ -45,9 +45,10 @@ Tests need to be de-coupled from the code they are testing. Song for instance ca
 ## 3. Unearthing Concepts
 
 > Conditionals breed
+
 I like this saying. It is true that 1 conditional becomes 2, becomes 7 nested if-else.
 
-SOLID "O"
+### SOLID "O"
 > The "open" principle says that you should not conflate the process of moving code around, of refactoring, with the act of adding new features. You should instead separate these two operations. When faced with a new requirement, first rearrange the existing code such that it’s open to the new feature, and once that’s complete, then add the new code.
 
 Our Bottles class isn't open because it doesn't contain the right abstractions to add the functionality by only adding code. It requires refactoring first.
@@ -83,3 +84,43 @@ end
 **Use the language of the domain.** Drinking container vs unit/number
 
 All of this is to make small, reversible changes and allow code abstractions to appear. **We are looking for the differences between similar code. Not the similarities.**
+
+### Discipline and refactoring
+This sounds like a broken record. Making one line or one spiritually one line changes requries a lot of discipline and changing of behaviour after professionally coding to "get things done" for years. I'm used to making changes in groups. 
+
+These days I think making changes in a group is actually a slower way to work if I can get fast enough at smart, targeted, refactorings.
+
+## 4. Practicing Horizontal Refactoring
+
+My areas that look similar - I haven't read the following section yet.
+1. The final verse in case 1, and default, can be abstracted.
+2. The 3rd verse is different in those two cases.
+3. The bottles of beer on the wall verse is pretty similar across all of them.
+
+Naming the abstraction correctly is important!
+Take 5 to 10 minutes with a thesaurus to come up with a name.
+
+If you need to return the false branch of a conditional when refactoring you can you a simple parameter default. If you need to return true first the default must do that for you.
+
+### SOLID "I" Liskov SubStitution Principle
+
+Doing the refactoring where we use the same quantity method and do capitalization after the fact is a good example of making a small change now and not trying to create the whole abstraction all at once.
+
+```Ruby
+"No more bottles of beer on the wall, "
+"#{quantity(number).capitalize()} bottles of beer on the wall, "
+"#{number} #{container(number)} of beer on the wall, "
+```
+
+When calling quantity(number).to_s.capitalize(), the caller has to know the quantity(number) method doesn't always return something that can be capitalized. Making the return of quantity() consistent will eliminate this.
+
+Between recievers and senders:
+- Statically typed languages have an explicit contract
+- Dynamically typed languages have an implicit contract
+
+Only take the differences in the strings at first. Watch out for similar commas.
+
+If you get red tests after refactoring, learn to back up to the last point of all green and then move forward with simpler steps. Don't push forward working under red tests.
+
+## 5. Separating Responsibilities
+
