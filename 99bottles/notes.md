@@ -137,3 +137,10 @@ For the code at the start of chapter 5
 
 Make sure different concepts don't go by the same name, or the converse, having a single concept hidden by multiple different names.
 
+The simple parameter of number is a dependency the flocked methods have. It's not "smart" enough in some way. I think this will be solved by using a class somehow.
+
+When looking at code with an OOP lens we should be suspicious of conditionals.
+
+Conditionals when an object is creating other objects is okay, otherwise we should avoid them.
+
+**Extract class!**
