@@ -124,3 +124,16 @@ If you get red tests after refactoring, learn to back up to the last point of al
 
 ## 5. Separating Responsibilities
 
+Identifying code smells
+1. Practice describing the characteristics of the code.
+
+For the code at the start of chapter 5
+1. Amount to drink and type of container is two separate methods.
+2. container, quantity, action, pronoun, successor - all take the same parameter, number, and have the same shape
+3. Every method except song and verses can be private. Should be private?
+4. I would spit the class into Verse and Song
+
+> Having multiple methods that take the same argument is a code smell. It’s important however, to recognize that here the term "same" means same concept, not identical name.
+
+Make sure different concepts don't go by the same name, or the converse, having a single concept hidden by multiple different names.
+
