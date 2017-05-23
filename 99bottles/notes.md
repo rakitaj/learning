@@ -124,3 +124,35 @@ If you get red tests after refactoring, learn to back up to the last point of al
 
 ## 5. Separating Responsibilities
 
+Methods: container, successor, pronoum, action
+* all have the same shape, simple branched conditional
+* take 1 parameter, number
+* all of them could be private methods, are implementation details to me
+* would break the class into Verse and Song classes, Song will contain Verses(start, end) as well
+* the methods only care about the argument passed, not the class as a whole
+* **from the book** - these are all the flocked methods
+
+Class: Bottles
+* no instance or class variables
+
+### Squint test
+Useful for checking the shape of code, super simple. I like it. I need to make sure I use an IDE or text editor with syntax highlighting and auto-formatting as much as possible.
+
+Do not use the same parameter name or variable name to represent two different concepts. I didn't realize the difference between verse number and bottle number.
+
+Most of my answers to the questions are the same as the book, I'll take that as a sign I'm learning.
+
+Is it not OO enough to depend on only the argument? That makes testing very simple. I don't like the idea of depending on instance or class variables to remove an argument.
+
+A more OO mindset
+* Conditional that select the right object to create == okay
+* Conditional that supplies behavior == bad
+
+Ideally we want to pass a "smarter number" object to that method and all it does is call a method on that object. Sort of forwarding the message (method call). Using the method to disambiguate.
+
+> Primitive Obsession as the dominant code smell. Built-in data classes like String, Integer, Array, and Hash are examples of "primitives." Primitive Obsession is when you use one of these data classes to represent a concept in your domain.
+
+Make a distinction between domain classes and data classes.
+
+Class names can be more concrete, method names need to be more abstract.
+Golden rule of 1 level higher than what they do?
