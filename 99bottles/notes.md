@@ -167,3 +167,34 @@ Make a distinction between domain classes and data classes.
 
 Class names can be more concrete, method names need to be more abstract.
 Golden rule of 1 level higher than what they do?
+
+**Extract class**
+1. Call new class and method in old class and don't do anything with the result. The method can execute without barfing.
+2. Move new call to bottom of old method. Still discard result. This doesn't change anything but run tests anyways.
+3. Remove all code from old method except the new class and method call. Now you're using the new code.
+4. Repeat until done!
+
+**Add parameter**
+
+**Remove parameter**
+1. Change name of parameter and provide a default like nil or null. This way it relies on the class instance variables.
+2. Remove the argument from the call sites of the method one at a time.
+3. Remove the parameter and its default value.
+4. Done!
+
+When changing verse to send messages directly to BottleNumber, the fourth verse is different from all of the others. It needs to know about the next verse number, not the current.
+
+*Before reading*
+- I could use BottleNumber and call successor on that then create another BottleNumber object with the correct verse number.
+- Create class to represent the verse number? It can know current and the next?
+
+*After reading*
+Successor breaks the Liskov Substitution Principle. It should return an object of the same type as its class aka the receiever.
+Changing the successor method this much, before fixing the 4th verse is a vertical refactor. Keep doing the horizontal refactor.
+
+Still working towards that six-pack requirement change!
+When I first got the requirement I implemented it in code around Chapter 2 and didn't realize I wasn't fixing any code smells. Only adding another conditional without the code being open for modification.
+
+If there is one principle I'm still having a hard time with it's the "open for modification", I'm not sure when the code goes from not being open to being open.
+
+## 6. Achieving Openness
