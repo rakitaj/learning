@@ -124,6 +124,15 @@ If you get red tests after refactoring, learn to back up to the last point of al
 
 ## 5. Separating Responsibilities
 
+Identifying code smells
+1. Practice describing the characteristics of the code.
+
+For the code at the start of chapter 5
+1. Amount to drink and type of container is two separate methods.
+2. container, quantity, action, pronoun, successor - all take the same parameter, number, and have the same shape
+3. Every method except song and verses can be private. Should be private?
+4. I would spit the class into Verse and Song
+
 Methods: container, successor, pronoum, action
 * all have the same shape, simple branched conditional
 * take 1 parameter, number
@@ -138,7 +147,9 @@ Class: Bottles
 ### Squint test
 Useful for checking the shape of code, super simple. I like it. I need to make sure I use an IDE or text editor with syntax highlighting and auto-formatting as much as possible.
 
-Do not use the same parameter name or variable name to represent two different concepts. I didn't realize the difference between verse number and bottle number.
+Do not use the same parameter name or variable name to represent two different concepts, or have a single concept hidden by multiple different names. I didn't realize the difference between verse number and bottle number.
+
+> Having multiple methods that take the same argument is a code smell. It’s important however, to recognize that here the term "same" means same concept, not identical name.
 
 Most of my answers to the questions are the same as the book, I'll take that as a sign I'm learning.
 
