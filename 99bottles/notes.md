@@ -193,8 +193,49 @@ Successor breaks the Liskov Substitution Principle. It should return an object o
 Changing the successor method this much, before fixing the 4th verse is a vertical refactor. Keep doing the horizontal refactor.
 
 Still working towards that six-pack requirement change!
-When I first got the requirement I implemented it in code around Chapter 2 and didn't realize I wasn't fixing any code smells. Only adding another conditional without the code being open for modification.
+When I first got the requirement I implemented it in code around Chapter 2 and didn't realize I wasn't fixing any code smells. I used the concept of "bottle phrase", which in hindsight should have been "container phrase". It was basically more conditionals.
 
 If there is one principle I'm still having a hard time with it's the "open for modification", I'm not sure when the code goes from not being open to being open.
 
 ## 6. Achieving Openness
+
+**Container phrase** was my (slightly less than ideal) recognition of a data clump!!
+
+**Code smell - Data Clump**
+Data fields that occur together. When data fields are all separate, their management logic is duplicated everywhere the data fields are used.
+
+Pay attenetion to where you add blank lines, they signify changes of responsibility and topic. Can you split it up?
+
+**Data Clump**
+1. Group the data fields together.
+2. Change call sites to refer to new method, field, etc..
+
+**Code smell - Switch Statement**
+To fix, from Fowler
+1. Replace conditional with state/strategy (does not use inheritance)
+2. Replace conditional with polymorphism (uses inheritance)
+
+**Replace conditional with polymorphism**
+1. Create new sub class that stands for one of the values the conditional switches on in the base class.
+2. Copy a method over that switches on that value to the new class
+3. Remove the branches that *are not* for that value. When that is done, no branching is needed in this location.
+4. In the base class remove branch that you just created in sub class.
+5. Repeat for all conditionals of that value
+6. If there is another value the base class it switches on, create a sub class for that value.
+7. Repeat!
+
+Eliminating conditionals, we don't eliminate them, we replace conditionals in many places in different methods with one conditional picking the right object to create. **A factory**
+
+Getting rid of conditionals that way finally makes sense. Before I was trying to understand how it would work when we still had to switch on an object. The minimization of conditionals and having them all in one spot is what matters here.
+
+In dynamic languages like Ruby, trusting other objects is key. It allows you to code without checking against every type of concrete class you want to work with. These lists of classes you are checking against will 100% change in the future. The typical underlying cause is not enough polymorphism.
+
+### Open for extension
+If you only need to add code and not change other code, it is open for extension. The concrete example in the book is I need to add a new subclass for BottleNumber6, the six-pack, requirement. But I do need to change the factory.
+
+#### Making the factory open for extension
+In Ruby you can use meta programming since the classes are all called BottleNumberN. get_const will attempt to create the class from a string.
+
+> Do the benefits of openness justify the cost of this additional complexity?
+
+## Afterword
