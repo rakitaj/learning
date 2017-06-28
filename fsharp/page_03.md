@@ -15,28 +15,39 @@ val functionName: domain -> range
 ```
 
 ## Simple values
-```
+```fsharp
 Enter
 let c = 5
 Evaluated
 val c : int = 5
-```
-
-Simple values always have a signature like
-```
+// Simple values always have a signature like
 val aName: type = constant
 ```
+
 Functions are values that can be passed around as inputs to other functions 
 
 ### Constant function
-```
+```fsharp
 let c = fun() -> 5
 let c() = 5
-```
-Signature is
-```
+// Signature is
 val c : unit -> int
 ```
 
 ## Values vs Objects
 A value is just a member of a domain. Values are immutable and don't have behavior associated/attached to them.
+
+## Naming values
+Apostrophes ' are ok!?! They can be used anywhere except the first character.
+```fsharp
+let f = x
+let f' = derivative f
+let f'' = derivative f'
+```
+Double backticks made anythign a valid identifier
+```fsharp
+let `like this works!` = true
+```
+
+functions and values start with a lowercase letter, unlike C#
+Types and Modules start with an uppercase letter
