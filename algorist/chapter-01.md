@@ -62,3 +62,22 @@ def optimal_scheduling(intervals):
 Reasonable looking algorithms can easily be incorrect.
 
 ### 1.3 Reasoning about Correctness
+Algorithms have two things
+1. The allowed set of input values
+2. The required characteristics of the output
+
+Side note about scheduling: If the movie schedule problem allowed breaks in the movie filming, each movie would be a set of intervals. Our solution wouldn't have worked, and there is no known effecient algorithm for that problem.
+
+Ask well defined questions.
+Ex: What does the best route mean? Shortest distance, fastest route, fewest turns?
+
+Prove incorrectness using counter-examples. Think small, very small and exhaust the possibilities of your small example.
+
+No counter-examples does not mean it is correct. To prove correctness we need something formal, often mathematical induction.
+
+**Recursion is mathematical induction.**
+We have a general case and a boundary case. The general case breaks the problem into smaller bits, the boundary case terminates it.
+
+Mathematical induction is usually the right way to prove a recursive problem or an iterative insertion problem.
+
+Mathematical summation formula is an application of induction.
