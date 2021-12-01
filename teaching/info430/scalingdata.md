@@ -32,12 +32,13 @@ TODO: Insert diagrams here of a database schema vs object collections or object 
 - Keep it simple
 - Data on one node or one system
 - Use what you know best
-- Be concrete not abstract![1]
-  1. How many requests per second do you expect?
-  2. What do your users expect
+- Figure out your requirements
+  1. Be concrete not abstract![1]
+  2. How many requests per second do you expect?
+  3. What do your users expect
     - How much time do you have to respond to a request
     - Can you lose data
-  2. What types of requests will you have, what is their load?
+  4. What types of requests will you have, what is their load?
     - User creation or account registration
     - Read heavy, write heavy, or balanced?
     - Social media post? To one? To many?
@@ -47,9 +48,11 @@ TODO: Insert diagrams here of a database schema vs object collections or object 
 ## Medium application
 - Focus on scaling out vs scaling up
 - Shard data
-  - What will you shard on?
+  - What key or keys will you shard on?
   - Beware of worst case scenarios shard sizes
-- If you're using an ORM check the queries it generates
+- Tune your ORM queries
+
+## Large application
 
 ### Latency numbers
 
