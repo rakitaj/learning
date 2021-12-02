@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="../modest.css" />
+<meta charset="utf-8">
+</head>
+<body>
+<h1 id="onethousandonemilliononebilliondatastrategiesforeverysize">One Thousand, One Million, One Billion - Data strategies for every size</h1>
+<p>How, when, and why do we scale our data storage systems and our data model as we grow?
+Which decisions are easy to change? Which are hard?</p>
+<h2 id="ourconcepts">Our Concepts</h2>
+<h3 id="datastoragesystem">Data storage system</h3>
+<p>What is a data storage system?</p>
+<ul>
+<li>It's anything that lets the application keep data between requests.</li>
+<li>Typically an external system to the application.</li>
+<li>Ideally it's failure tolerant to power loss, </li>
+</ul>
+<h3 id="datastoragesystemtypes">Data storage system types</h3>
+<ul>
+<li>Relational database</li>
+<li>Client/server architecture: MySQL, PostgreSQL, MS SQL Server</li>
+<li>"Filesystem based": SQLite3</li>
+<li>NoSQL database: MongoDB, Cassandra, PostgreSQL with JSON type</li>
+<li>Something completely homegrown (Spoiler alert - that's what we did)</li>
+</ul>
+<h3 id="datamodel">Data model</h3>
+<p>What is the data model?</p>
+<ul>
+<li>The application's view of the data.</li>
+<li>Application's view and use data differently from the data storage system.</li>
+<li>Object-relational impedance mismatch</li>
+</ul>
+<h3 id="datamodelvsdatastorage">Data model vs data storage</h3>
+<p>TODO: Insert diagrams here of a database schema vs object collections or object graphs.</p>
+<h2 id="datamodelforasmallapplication">Data model for a small application</h2>
+<ul>
+<li>Keep it simple</li>
+<li>Data on one node or one system</li>
+<li>Use what you know best</li>
+<li>Be concrete not abstract![^1]</li>
+</ul>
+<ol>
+<li>How many requests per second do you expect?</li>
+<li>What do your users expect<ul>
+<li>How much time do you have to respond to a request</li>
+<li>Can you lose data</li></ul></li>
+<li>What types of requests will you have, what is their load?<ul>
+<li>User creation or account registration</li>
+<li>Read heavy, write heavy, or balanced?</li>
+<li>Social media post? To one? To many?</li>
+<li>What do you need to lookup?</li>
+<li>Geographical access pattern</li></ul></li>
+</ol>
+<h3 id=""> </h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Lower bound</th>
+<th>Upper Bound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User count</td>
+<td>5</td>
+<td>100,000</td>
+</tr>
+<tr>
+<td>Requests per second</td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="exercises">Exercises</h3>
+<ol>
+<li>How long does it take to do 1000 reads with a Python Flask application using SQLite3?</li>
+<li>How long does it take to create 100 users? Why does it take this long?</li>
+<li>Ballpark the magnitude of requests per second this system can handle</li>
+</ol>
+<h2 id="references">References</h2>
+<p>[^1]: <a href="https://sre.google/workbook/non-abstract-design/">Google System Design Exercise</a></p>
+</body>
+</html>

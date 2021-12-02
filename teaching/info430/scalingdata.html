@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" href="..\modest.css" />
+<meta charset="utf-8">
+</head>
+<body>
+<h1 id="scalingdata">Scaling Data</h1>
+<p><strong>One Thousand, One Million, One Billion - Data strategies for every size</strong>
+How, when, and why do we scale our data storage systems and our data model as we grow?
+Which decisions are easy to change? Which are hard?</p>
+<h2 id="ourconcepts">Our Concepts</h2>
+<h3 id="datastoragesystem">Data storage system</h3>
+<p>What is a data storage system?</p>
+<ul>
+<li>It's anything that lets the application keep data between requests.</li>
+<li>Typically an external system to the application.</li>
+<li>Ideally it's failure tolerant to power loss, </li>
+</ul>
+<h3 id="datastoragesystemtypes">Data storage system types</h3>
+<ul>
+<li>Relational database</li>
+<li>Client/server architecture: MySQL, PostgreSQL, MS SQL Server</li>
+<li>"Filesystem based": SQLite3</li>
+<li>NoSQL database: MongoDB, Cassandra, PostgreSQL with JSON type</li>
+<li>Something completely homegrown (Spoiler alert - that's what we did)</li>
+</ul>
+<h3 id="datamodel">Data model</h3>
+<p>What is the data model?</p>
+<ul>
+<li>The application's view of the data.</li>
+<li>Application's view and use data differently from the data storage system.</li>
+<li>Object-relational impedance mismatch</li>
+</ul>
+<h3 id="datamodelvsdatastorage">Data model vs data storage</h3>
+<p>TODO: Insert diagrams here of a database schema vs object collections or object graphs.</p>
+<h2 id="smallapplication">Small application</h2>
+<ul>
+<li>Keep it simple</li>
+<li>Data on one node or one system</li>
+<li>Use what you know best</li>
+<li>Figure out your requirements</li>
+</ul>
+<ol>
+<li>Be concrete not abstract![1]</li>
+<li>How many requests per second do you expect?</li>
+<li>What do your users expect<ul>
+<li>How much time do you have to respond to a request</li>
+<li>Can you lose data</li></ul></li>
+<li>What types of requests will you have, what is their load?<ul>
+<li>User creation or account registration</li>
+<li>Read heavy, write heavy, or balanced?</li>
+<li>Social media post? To one? To many?</li>
+<li>What do you need to lookup?</li>
+<li>Geographical access pattern</li></ul></li>
+</ol>
+<h2 id="mediumapplication">Medium application</h2>
+<ul>
+<li>Focus on scaling out vs scaling up</li>
+<li>Shard data</li>
+<li>What key or keys will you shard on?</li>
+<li>Beware of worst case scenarios shard sizes</li>
+</ul>
+<h2 id="tuneyourormqueries">- Tune your ORM queries</h2>
+<h3 id="latencynumbers">Latency numbers</h3>
+<p><strong>Note</strong>: These numbers are from the references below and while the scale is correct, disks are much faster because they're SSDs instead of spinning drives.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 cache reference</td>
+<td>0.5 ns</td>
+</tr>
+<tr>
+<td>Branch mispredict</td>
+<td>5 ns</td>
+</tr>
+<tr>
+<td>L2 cache reference</td>
+<td>7 ns</td>
+</tr>
+<tr>
+<td>Mutex lock/unlock</td>
+<td>100 ns</td>
+</tr>
+<tr>
+<td>Main memory reference</td>
+<td>100 ns</td>
+</tr>
+<tr>
+<td>Compress 1K bytes with Zippy</td>
+<td>10,000 ns</td>
+</tr>
+<tr>
+<td>Send 2K bytes over 1 Gbps network</td>
+<td>20,000 ns</td>
+</tr>
+<tr>
+<td>Read 1 MB sequentially from memory</td>
+<td>250,000 ns</td>
+</tr>
+<tr>
+<td>Round trip within same datacenter</td>
+<td>500,000 ns</td>
+</tr>
+<tr>
+<td>Disk seek</td>
+<td>10,000,000 ns</td>
+</tr>
+<tr>
+<td>Read 1 MB sequentially from network</td>
+<td>10,000,000 ns</td>
+</tr>
+<tr>
+<td>Read 1 MB sequentially from disk</td>
+<td>30,000,000 ns</td>
+</tr>
+<tr>
+<td>Send packet CA-&gt;Netherlands-&gt;CA</td>
+<td>150,000,000 ns</td>
+</tr>
+</tbody>
+</table>
+<h3 id="applicationquestions">Application questions</h3>
+<h2 id="question">| Question |</h2>
+<p>| How many users? |
+| When is peak load? |</p>
+<h3 id="exercises">Exercises</h3>
+<ol>
+<li><ol>
+<li>How long does it take to do 1000 reads with a Python Flask application using SQLite3?</li></ol></li>
+<li>How long does it take to create 100 users? Why does it take this long?</li>
+<li>Ballpark the magnitude of requests per second this system can handle</li>
+</ol>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://sre.google/workbook/non-abstract-design/">Google System Design Exercise</a></li>
+<li><a href="http://norvig.com/21-days.html#answers">Latency Numbers Every Programmer Should Know</a></li>
+<li><a href="http://highscalability.com/blog/2011/1/26/google-pro-tip-use-back-of-the-envelope-calculations-to-choo.html">Google Pro Tips</a></li>
+</ol>
+</body>
+</html>

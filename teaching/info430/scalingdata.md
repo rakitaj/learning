@@ -51,8 +51,7 @@ TODO: Insert diagrams here of a database schema vs object collections or object 
   - What key or keys will you shard on?
   - Beware of worst case scenarios shard sizes
 - Tune your ORM queries
-
-## Large application
+- 
 
 ### Latency numbers
 
@@ -73,6 +72,12 @@ TODO: Insert diagrams here of a database schema vs object collections or object 
 | Read 1 MB sequentially from network | 10,000,000 ns |
 | Read 1 MB sequentially from disk | 30,000,000 ns |
 | Send packet CA->Netherlands->CA | 150,000,000 ns | 
+
+### Application questions
+| Question |
+------------
+| How many users? |
+| When is peak load? |
 
 ### Exercises
 1. 
